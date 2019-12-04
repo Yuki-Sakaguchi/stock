@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./bootstrap4.css">
-    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="./assets/css/bootstrap4.css">
+    <script src="./assets/js/jquery.js"></script>
     <style>
       body {
         width: 300px;
@@ -14,17 +14,60 @@
         width: 100%;
         display: block;
       }
+      .card {
+          position: relative;
+      }
+      .card-img-top {
+          position: relative;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+      }
+      .card-img-top::before {
+          content: "";
+          padding-top: 56.25%;
+          display: table;
+      }
+      .card-img-top.no-image::after {
+        content: "No image.";
+        background-color: #f4ba1e;
+        color: white;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
     <div class="p-3">
+      <h5>TARGET</h5>
+      <div class="card" v-for="row in reverseList" :key="row">
+        <div class="card-img-top no-image js-image"></div>
+        <div class="card-body">
+          <h5 class="card-title js-title"></h5>
+        </div>
+      </div>
       <form method="post" action="https://script.google.com/a/axelentermedia.jp/macros/s/AKfycbwGl3bJnpy1Bd1FA4U2bY14xrFMeWMm5qcHY7shv1PBbxpb9oKL/exec">
-        <h4>URL</h4>
-        <input type="text" name="url" value="">
-        <h4 class="mt-4">CATEGORY</h4>
-        <input type="text" name="category" value="design,frontend,backend">
+        <input type="hidden" name="img">
+
+        <h5 class="mt-4">URL</h5>
+        <input type="text" name="url">
+        
+        <h5 class="mt-4">CATEGORY</h5>
+        <input type="text" name="category">
+
+        <h5 class="mt-4">MEMO</h5>
+        <input type="text" name="memo">
+
         <div class="mt-4 text-center">
-          <input class="btn btn-dark" type="submit" value="submit">
+          <input id="btn" class="btn btn-dark" type="submit" value="submit">
+          <a class="btn btn-dark" href="https://script.google.com/a/axelentermedia.jp/macros/s/AKfycbwGl3bJnpy1Bd1FA4U2bY14xrFMeWMm5qcHY7shv1PBbxpb9oKL/exec" target="_blank">一覧を見る</a>
         </div>
       </form>
     </div>

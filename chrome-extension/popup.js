@@ -1,16 +1,31 @@
-const data = {"Title": "", "URL": ""}
 
-chrome.tabs.getSelected(tab => {  // 現在のタブを取得
-  data.Title = tab.title;  // tabに現在のタブが格納されている（？）。
-  data.URL = tab.url;    // tab.titleには現在開いているタブのページタイトルが、tab.urlにはURLが格納されている。
-  console.log(`Title: ${data.Title}`);  // 出力は、「ポップアップを検証」で見れる。
-  console.log(`URL: ${data.URL}`);
-  $('input[name="url"]').val(data.URL);
+chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { color: "black" }, function (response) {
+        console.log(response)
+        if (!response) {
+            return false;
+        }
+        if (response['title']) {
+            $('.js-title').text(response.title);
+        }
+
+        if (response['path']) {
+            $('.js-image').removeClass('no-image').css('background-image', "url('" + response.path + "')");
+            $('input[name="img"]').val(response.path);
+        }
+
+        if (response['url']) {
+            $('input[name="url"]').val(response.url);
+        }
+    });
 });
-  
 
-$("#btn").on("click", () => {
-  chrome.runtime.sendMessage({ greeting: "hello" }, function(response) {
-    console.log(response);
-  });
+/**
+ * 送信したら閉じる
+ */
+$("form").on("submit", (e) => {
+    setTimeout(function () {
+        alert('stockしました🎉');
+        window.close();
+    }, 300);
 });
