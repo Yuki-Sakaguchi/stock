@@ -8,7 +8,7 @@
     <script src="./assets/js/jquery.js"></script>
     <style>
       body {
-        width: 300px;
+        width: 400px;
       }
       input[type="text"] {
         width: 100%;
@@ -50,11 +50,12 @@
       <div class="card" v-for="row in reverseList" :key="row">
         <div class="card-img-top no-image js-image"></div>
         <div class="card-body">
-          <h5 class="card-title js-title"></h5>
+          <h5 class="card-title js-title small"></h5>
         </div>
       </div>
       <form method="post" action="https://script.google.com/a/axelentermedia.jp/macros/s/AKfycbwGl3bJnpy1Bd1FA4U2bY14xrFMeWMm5qcHY7shv1PBbxpb9oKL/exec">
         <input type="hidden" name="img">
+        <input type="hidden" name="title">
 
         <h5 class="mt-4">URL</h5>
         <input type="text" name="url">

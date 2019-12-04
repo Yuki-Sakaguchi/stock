@@ -7,6 +7,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         }
         if (response['title']) {
             $('.js-title').text(response.title);
+            $('input[name="title"]').val(response.title);
         }
 
         if (response['path']) {
